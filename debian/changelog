@@ -1,3 +1,9 @@
+dh-quicklisp-buildapp (0.2) stable; urgency=medium
+
+  * Fixes the dependencies
+
+ -- Florian Margaine <florian@margaine.com>  Sun, 29 Nov 2015 21:35:42 +0100
+
 dh-quicklisp-buildapp (0.1) stable; urgency=low
 
   * Initial release.

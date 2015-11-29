@@ -6,6 +6,14 @@ into a buildapp binary in a .deb with almost no effort.
 For the "almost no effort" part to work, `dh-quicklisp-buildapp` is
 quite opinionated.
 
+## Installation
+
+```
+$ wget https://github.com/ralt/dh-quicklisp-buildapp/releases/download/0.2/dh-quicklisp-buildapp_0.2_all.deb # Validate it with the .dsc
+$ sudo dpkg -i dh-quicklisp-buildapp_0.2_all.deb
+$ sudo apt-get -f install # Install missing dependencies if necessary
+```
+
 ## Instructions
 
 Setup your `debian/` folder with at minimum:
@@ -26,7 +34,7 @@ The `rules` file just needs this:
 #!/usr/bin/make -f
 
 %:
-        dh $@ --with=quicklisp_buildapp --verbose
+        dh $@ --with=quicklisp_buildapp
 ```
 
 (Note that a tab character is needed.)
@@ -52,3 +60,7 @@ Patches welcome!
 ## License
 
 MIT license.
+
+## About me
+
+My keybase: https://keybase.io/fmargaine

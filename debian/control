@@ -1,10 +1,11 @@
 Source: dh-quicklisp-buildapp
 Maintainer: Florian Margaine <florian@margaine.com>
+Build-Depends: debhelper
 Section: misc
 Priority: optional
 Standards-Version: 3.9.1
 
 Package: dh-quicklisp-buildapp
 Architecture: all
-Depends: buildapp, sbcl, wget
+Depends: buildapp, sbcl, wget, debhelper
 Description: dh utility for quicklisp-based projects.
