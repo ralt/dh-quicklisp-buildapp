@@ -1,0 +1,10 @@
+Source: dh-quicklisp-buildapp
+Maintainer: Florian Margaine <florian@margaine.com>
+Section: misc
+Priority: optional
+Standards-Version: 3.9.1
+
+Package: dh-quicklisp-buildapp
+Architecture: all
+Depends: buildapp, sbcl, wget
+Description: dh utility for quicklisp-based projects.

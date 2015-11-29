@@ -1,0 +1,32 @@
+#!/usr/bin/perl -w
+
+=head1 NAME
+
+dh_quicklisp_clean - clean up everything added by dh_quicklisp
+
+=cut
+
+use strict;
+use Debian::Debhelper::Dh_Lib;
+
+init();
+
+doit("rm", "-rf", ".quicklocal/");
+doit("rm", "-f", "quicklisp.lisp");
+foreach my $package (@{$dh{DOPACKAGES}}) {
+    doit("rm", "-f", $package);
+}
+
+=head1 SEE ALSO
+
+L<debhelper(1)>
+
+This program is part of the dh-quicklisp package.
+
+L<dh-quicklisp(8)>
+
+=head1 AUTHOR
+
+Florian Margaine <florian@margaine.com>
+
+=cut

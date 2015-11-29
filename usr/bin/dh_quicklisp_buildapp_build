@@ -1,0 +1,53 @@
+#!/usr/bin/perl -w
+
+=head1 NAME
+
+dh_quicklisp_build - build the Lisp system using quicklisp
+
+=cut
+
+use strict;
+use Debian::Debhelper::Dh_Lib;
+use Cwd qw();
+
+init();
+
+foreach my $package (@{$dh{DOPACKAGES}}) {
+    # The build is done in 4 parts:
+    #   - Get quicklisp.lisp
+    #   - Install quicklisp in .quicklocal/
+    #   - Install dependencies using the local quicklisp
+    #   - Build the binary using buildapp
+    my $cwd = Cwd::cwd();
+    doit("wget", "https://beta.quicklisp.org/quicklisp.lisp");
+    complex_doit("echo", "'4a7a5c2aebe0716417047854267397e24a44d0cce096127411e9ce9ccfeb2c17", "quicklisp.lisp'", "|", "sha256sum", "-c", "-");
+
+    complex_doit("sbcl", "--noinform", "--noprint", "--disable-debugger",
+                 "--no-sysinit", "--no-userinit", "--load", "quicklisp.lisp",
+                 "--eval", "'(quicklisp-quickstart:install", ":path", "\".quicklocal/quicklisp/\"",
+                 ")'", "--eval", "'(quit)'");
+    complex_doit("sbcl", "--noinform", "--noprint", "--disable-debugger",
+                 "--no-sysinit", "--no-userinit",
+                 "--load", ".quicklocal/quicklisp/setup.lisp",
+                 "--eval", "'(push", "\"$cwd/\"", "asdf:*central-registry*)'",
+                 "--eval", "'(ql:quickload", ":$package)'",
+                 "--quit");
+    complex_doit("buildapp", "--asdf-tree", ".quicklocal/quicklisp/dists",
+                 "--asdf-path", ".", "--load-system", $package,
+                 "--compress-core", "--output", $package,
+                 "--entry", "$package:main");
+}
+
+=head1 SEE ALSO
+
+L<debhelper(1)>
+
+This program is part of the dh-quicklisp package.
+
+L<dh-quicklisp(8)>
+
+=head1 AUTHOR
+
+Florian Margaine <florian@margaine.com>
+
+=cut

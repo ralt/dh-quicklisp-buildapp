@@ -1,0 +1,5 @@
+dh-quicklisp-buildapp (0.1) stable; urgency=low
+
+  * Initial release.
+
+ -- Florian Margaine <florian@margaine.com>  Sat, 28 Nov 2015 23:35:22 +0000
