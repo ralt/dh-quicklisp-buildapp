@@ -13,6 +13,7 @@ init();
 
 doit("rm", "-rf", ".quicklocal/");
 doit("rm", "-f", "quicklisp.lisp");
+complex_doit("find", ".", "-name", "'*.fasl'", "-exec", "rm", "-f", "{}", "\;");
 foreach my $package (@{$dh{DOPACKAGES}}) {
     doit("rm", "-f", $package);
 }
