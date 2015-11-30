@@ -1,3 +1,14 @@
+dh-quicklisp-buildapp (0.3) stable; urgency=medium
+
+  [ Florian MARGAINE ]
+  * Delete fasl files too
+  * Rename dh_quicklisp to dh_quicklisp_buildapp
+  * Only download and install quicklisp once
+
+  [ Florian Margaine ]
+
+ -- Florian Margaine <florian@margaine.com>  Tue, 01 Dec 2015 00:04:59 +0100
+
 dh-quicklisp-buildapp (0.2) stable; urgency=medium
 
   * Fixes the dependencies
