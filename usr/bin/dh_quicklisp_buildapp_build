@@ -2,7 +2,7 @@
 
 =head1 NAME
 
-dh_quicklisp_build - build the Lisp system using quicklisp
+dh_quicklisp_buildapp_build - build the Lisp system using quicklisp
 
 =cut
 
@@ -42,9 +42,9 @@ foreach my $package (@{$dh{DOPACKAGES}}) {
 
 L<debhelper(1)>
 
-This program is part of the dh-quicklisp package.
+This program is part of the dh-quicklisp-buildapp package.
 
-L<dh-quicklisp(8)>
+L<dh-quicklisp-buildapp(8)>
 
 =head1 AUTHOR
 
