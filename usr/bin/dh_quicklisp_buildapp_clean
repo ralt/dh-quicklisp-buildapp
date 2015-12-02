@@ -9,14 +9,19 @@ dh_quicklisp_buildapp_clean - clean up everything added by dh-quicklisp-buildapp
 use strict;
 use Debian::Debhelper::Dh_Lib;
 
+use QuicklispBuildapp::Utils;
+
 init();
 
 doit("rm", "-rf", ".quicklocal/");
 doit("rm", "-f", "quicklisp.lisp");
 complex_doit("find", ".", "-name", "'*.fasl'", "-exec", "rm", "-f", "{}", "\\;");
-foreach my $package (@{$dh{DOPACKAGES}}) {
-    doit("rm", "-f", $package);
+
+sub clean_system {
+    doit("rm", "-f", $_[0]);
 }
+
+QuicklispBuildapp::Utils::buildapp(@{$dh{DOPACKAGES}}, \&clean_system);
 
 =head1 SEE ALSO
 

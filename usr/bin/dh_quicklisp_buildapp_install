@@ -10,13 +10,18 @@ use strict;
 use File::Find;
 use Debian::Debhelper::Dh_Lib;
 
+use QuicklispBuildapp::Utils;
+
 init();
 
-foreach my $package (@{$dh{DOPACKAGES}}) {
+sub install_system {
+    my ($binary, undef, undef, $package) = @_;
     my $tmp = tmpdir($package);
     doit("mkdir", "-p", "$tmp/usr/bin");
-    doit("install", "-p", "-m0755", $package, "$tmp/usr/bin");
+    doit("install", "-p", "-m0755", $binary, "$tmp/usr/bin");
 }
+
+QuicklispBuildapp::Utils::buildapp(@{$dh{DOPACKAGES}}, \&install_system);
 
 =head1 SEE ALSO
 

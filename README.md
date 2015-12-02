@@ -46,6 +46,19 @@ named `$package`, and use the `main` function of it as the entrypoint.
 It will fetch the latest quicklisp and then use `buildapp` to generate
 the binary that will be put in the .deb file.
 
+### buildapp
+
+If a `buildapp` or `package.buildapp` file exists, it will be parsed
+in the following way:
+
+- Each line defines a binary
+- Each line is 3 items separated by space: the binary name, the
+  system's name, and the entrypoint name.
+
+This lets you put multiple binaries in the same package.
+
+All the .asd must be in the root folder.
+
 ## Roadmap
 
 Eventually, `dh-quicklisp-buildapp` will support customizations such as:

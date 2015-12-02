@@ -10,6 +10,8 @@ use strict;
 use Debian::Debhelper::Dh_Lib;
 use Cwd qw();
 
+use QuicklispBuildapp::Utils;
+
 init();
 
 # The build is done in 4 parts:
@@ -26,18 +28,22 @@ complex_doit("sbcl", "--noinform", "--noprint", "--disable-debugger",
              "--eval", "'(quicklisp-quickstart:install", ":path", "\".quicklocal/quicklisp/\"",
              ")'", "--eval", "'(quit)'");
 
-foreach my $package (@{$dh{DOPACKAGES}}) {
+sub build_system {
+    my ($binary, $system, $entrypoint) = @_;
+
     complex_doit("sbcl", "--noinform", "--noprint", "--disable-debugger",
                  "--no-sysinit", "--no-userinit",
                  "--load", ".quicklocal/quicklisp/setup.lisp",
                  "--eval", "'(push", "\"$cwd/\"", "asdf:*central-registry*)'",
-                 "--eval", "'(ql:quickload", ":$package)'",
+                 "--eval", "'(ql:quickload", ":$system)'",
                  "--quit");
     complex_doit("buildapp", "--asdf-tree", ".quicklocal/quicklisp/dists",
-                 "--asdf-path", ".", "--load-system", $package,
-                 "--compress-core", "--output", $package,
-                 "--entry", "$package:main");
+                 "--asdf-path", ".", "--load-system", $system,
+                 "--compress-core", "--output", $binary,
+                 "--entry", "$entrypoint");
 }
+
+QuicklispBuildapp::Utils::buildapp(@{$dh{DOPACKAGES}}, \&build_system);
 
 =head1 SEE ALSO
 

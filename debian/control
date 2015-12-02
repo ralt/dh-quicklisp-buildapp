@@ -7,5 +7,5 @@ Standards-Version: 3.9.1
 
 Package: dh-quicklisp-buildapp
 Architecture: all
-Depends: buildapp, sbcl, wget, debhelper
+Depends: buildapp, sbcl, wget, debhelper, libfile-slurp-perl
 Description: dh utility for quicklisp-based projects.
