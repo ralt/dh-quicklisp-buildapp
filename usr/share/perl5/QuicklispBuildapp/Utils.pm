@@ -18,7 +18,7 @@ sub buildapp {
             }
         }
         else {
-            $callback->($package, $package, "$name::main");
+            $callback->($package, $package, "${package}::main");
         }
     }
 }

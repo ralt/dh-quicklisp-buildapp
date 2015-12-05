@@ -40,7 +40,7 @@ sub build_system {
     complex_doit("buildapp", "--asdf-tree", ".quicklocal/quicklisp/dists",
                  "--asdf-path", ".", "--load-system", $system,
                  "--compress-core", "--output", $binary,
-                 "--entry", "$entrypoint");
+                 "--entry", $entrypoint);
 }
 
 QuicklispBuildapp::Utils::buildapp(@{$dh{DOPACKAGES}}, \&build_system);
