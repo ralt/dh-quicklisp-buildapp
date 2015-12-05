@@ -37,7 +37,8 @@ sub build_system {
                  "--eval", "'(push", "\"$cwd/\"", "asdf:*central-registry*)'",
                  "--eval", "'(ql:quickload", ":$system)'",
                  "--quit");
-    complex_doit("buildapp", "--asdf-tree", ".quicklocal/quicklisp/dists",
+    complex_doit("buildapp", "--load", ".quicklocal/quicklisp/setup.lisp",
+                 "--asdf-tree", ".quicklocal/quicklisp/dists",
                  "--asdf-path", ".", "--load-system", $system,
                  "--compress-core", "--output", $binary,
                  "--entry", $entrypoint);
